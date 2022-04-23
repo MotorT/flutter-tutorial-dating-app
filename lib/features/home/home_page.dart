@@ -6,63 +6,40 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-        length: 3,
-        child: Column(
-          children: [
-            TabBar(
-              indicatorColor: Colors.blue,
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.directions_car,
-                    color: Colors.blue,
-                  ),
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Column(
+        children: [
+          Text('APHRO'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Image.network(
+                  'https://ath2.unileverservices.com/wp-content/uploads/sites/4/2020/02/IG-annvmariv-1024x1016.jpg',
                 ),
-                Tab(
-                  icon: Icon(
-                    Icons.directions_transit,
-                    color: Colors.blue,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Bella, 21',
+                      style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(
+                      Icons.lightbulb,
+                      color: Colors.yellow,
+                    ),
+                  ],
                 ),
-                Tab(icon: Icon(Icons.directions_bike)),
               ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  Icon(Icons.directions_car),
-                  Icon(Icons.directions_transit),
-                  Icon(Icons.directions_bike),
-                ],
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
-    );
-  }
-
-  Widget buildPageView() {
-    return PageView(
-      children: [
-        Image.asset('assets/images/dating_background.png'),
-        Container(
-          height: 300,
-          width: 300,
-          color: Colors.red,
-        ),
-        Container(
-          height: 300,
-          width: 300,
-          color: Colors.green,
-        ),
-        Container(
-          height: 300,
-          width: 300,
-          color: Colors.blue,
-        ),
-      ],
     );
   }
 }
