@@ -17,6 +17,7 @@ dependencies:
   swipe_cards: ^1.0.0
   mobile_scanner: ^1.0.0
   image_picker: ^0.8.5
+  firebase_core: ^1.16.0
 
 dev_dependencies:
   flutter_test:
