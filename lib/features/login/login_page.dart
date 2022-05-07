@@ -1,10 +1,20 @@
+import 'dart:io';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:dating_app/features/sign_up/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String? imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +53,26 @@ class LoginPage extends StatelessWidget {
                     children: [
                       const Text('blah blahblah'),
                       const SizedBox(height: 16),
+                      if (imagePath != null)
+                        Image.file(
+                          File(imagePath!),
+                          height: 200,
+                        ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          // DEMO FOR IMAGE PICKER
+                          final ImagePicker _picker = ImagePicker();
+                          // Choose from camera
+                          final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+                          // Choose from gallery
+                          // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                          if (image != null) {
+                            setState(() {
+                              print(image.path);
+                              imagePath = image.path;
+                            });
+                          }
+                        },
                         child: const Text('Login with Google'),
                       ),
                       const SizedBox(height: 16),
