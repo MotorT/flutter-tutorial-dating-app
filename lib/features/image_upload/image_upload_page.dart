@@ -19,48 +19,82 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Uploading...'),
+        title: const Text('Uploading...'),
         actions: [
           TextButton(
             onPressed: () {
               uploadMyCatsToFirebase();
             },
-            child: Text(
+            child: const Text(
               'Upload',
               style: TextStyle(color: Colors.white),
             ),
           ),
         ],
       ),
-      body: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        children: catsIndex.map((e) {
-          final isSelected = selectedPhotos.contains(e);
-          print('$e is selected: $isSelected');
-          return InkWell(
-            onTap: () {
-              setState(() {
-                if (isSelected) {
-                  selectedPhotos.remove(e);
-                } else {
-                  selectedPhotos.add(e);
-                }
-              });
-            },
-            child: Stack(
-              children: [
-                Image.asset('assets/images/cat$e.jpg'),
-                if (isSelected)
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Icon(Icons.check),
-                  ),
-              ],
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Text('test'),
+              Image.network(
+                'https://firebasestorage.googleapis.com/v0/b/timemama-b.appspot.com/o/test%2Fcat3.jpg?alt=media',
+                height: 40,
+              ),
+              Text('test'),
+              Text('test'),
+              Text('test'),
+              Text('test'),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [1, 2, 3]
+                  .map(
+                    (e) => Expanded(
+                      child: Image.network(
+                        'https://firebasestorage.googleapis.com/v0/b/timemama-b.appspot.com/o/test%2Fcat$e.jpg?alt=media',
+                        width: 52,
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
-          );
-        }).toList(),
+          ),
+          GridView(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            children: catsIndex.map((e) {
+              final isSelected = selectedPhotos.contains(e);
+              print('$e is selected: $isSelected');
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    if (isSelected) {
+                      selectedPhotos.remove(e);
+                    } else {
+                      selectedPhotos.add(e);
+                    }
+                  });
+                },
+                child: Stack(
+                  children: [
+                    Image.asset('assets/images/cat$e.jpg'),
+                    if (isSelected)
+                      const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Icon(Icons.check),
+                      ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+          const Divider(),
+        ],
       ),
     );
   }
@@ -69,7 +103,7 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
     print('Uploading cats: $selectedPhotos');
     final firebaseStorage = FirebaseStorage.instance;
     if (selectedPhotos.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Please select photos first'),
       ));
       return;
