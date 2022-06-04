@@ -1,3 +1,4 @@
+import 'package:dating_app/features/firestore/firestore_demo_page.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,17 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
       appBar: AppBar(
         title: const Text('Uploading...'),
         actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const FirestoreDemoPage();
+              }));
+            },
+            child: Text(
+              'FireStore Test',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
           TextButton(
             onPressed: () {
               uploadMyCatsToFirebase();
