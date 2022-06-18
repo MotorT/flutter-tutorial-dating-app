@@ -15,11 +15,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   animate_do: ^2.1.0
   swipe_cards: ^1.0.0
-  mobile_scanner: ^1.0.0
+  mobile_scanner: ^2.0.0
   image_picker: ^0.8.5
   firebase_core: ^1.16.0
   firebase_storage: ^10.2.16
   cloud_firestore: ^3.1.17
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
