@@ -24,9 +24,18 @@ class _FirestoreDemoPageState extends State<FirestoreDemoPage> {
             },
             child: const Text(
               'Load data',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Color.fromARGB(255, 54, 27, 27)),
             ),
           ),
+          TextButton(
+            onPressed: () {
+              _getUser();
+            },
+            child: const Text(
+              'Get user',
+              style: TextStyle(color: Colors.white),
+            ),
+          )
         ],
       ),
       body: Column(
@@ -75,6 +84,15 @@ class _FirestoreDemoPageState extends State<FirestoreDemoPage> {
     for (var doc in results.docs) {
       print("${doc.id} => ${doc.data()}");
     }
+
+    setState(() {});
+  }
+
+  void _getUser() async {
+    final db = FirebaseFirestore.instance;
+    final results = await db.collection("users").doc('gsmiCgKFTcNZPmr8S2cT9r06NqI3').get();
+
+    print(results.data());
 
     setState(() {});
   }
